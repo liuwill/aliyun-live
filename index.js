@@ -45,9 +45,12 @@ export class AliLive {
         let pureSortQuery = []
         for(let key of Object.keys(query).sort()){
             let valueStr = query[key]+''
-            let value = utility.encodeURIComponent(valueStr.replace(/:/g,'%3A'));
+            valueStr = valueStr.replace(/:/g,'%3A');
+            valueStr = valueStr.replace(/\//g,'%2F');
+            let value = utility.encodeURIComponent(valueStr);
             key = utility.encodeURIComponent(key);
             sortQuery[key] = value
+
             pureSortQuery.push(key+"="+value);
         }
         
@@ -67,12 +70,18 @@ export class AliLive {
         let paramList = [];
         for(let key of Object.keys(fullParam)){
             let value = fullParam[key] + "";
-            value = value.replace(/:/g,'%3A');
+            if(value.match(/:/g)){
+              value = value.replace(/:/g,'%3A');
+            }else if(value.match(/\//g)){
+              value = utility.encodeURIComponent(value);
+            }
+            //value = value.replace(/:/g,'%3A');
+            //value = value.replace(/\//g,'%2F');
             paramList.push(key+"="+value);
         }
         let paramStr = paramList.join('&');
         let realUrl = aliUrl + '?' + paramStr
-        
+
         var aliResult = await urllib.request(realUrl, {
             method: 'POST',
             dataType: 'json',
@@ -82,6 +91,9 @@ export class AliLive {
     }
 }
 
+/**
+ * 动态根据Json格式配置文件的规则生成函数，并且加到AliLive类的原型中
+ */
 function installAPI(){
     for(let name in ApiOperationConfig){
         let funcData = ApiOperationConfig[name];
@@ -344,6 +356,54 @@ let ApiOperationConfig = {
           },
           "Limit": {
             "type": "integer"
+          }
+        }
+      }
+    },
+    "createLiveStreamRecordIndexFiles": {
+      "name": "CreateLiveStreamRecordIndexFiles",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "CreateLiveStreamRecordIndexFiles"
+          },
+          "AppName":{
+            "required": true,
+            "type": "string"
+          },
+          "StreamName":{
+            "required": true,
+            "type": "string"
+          },
+          "DomainName": {
+            "required": true,
+            "type": "string"
+          },
+          "OssEndpoint":{
+            "required": false,
+            "type": "string"
+          },
+          "OssBucket": {
+            "required": false,
+            "type": "string"
+          },
+          "OssObject": {
+            "required": false,
+            "type": "string"
+          },
+          "StartTime": {
+            "required": true,
+            "type": "string"
+          },
+          "EndTime": {
+            "required": true,
+            "type": "string"
           }
         }
       }
