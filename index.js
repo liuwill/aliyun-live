@@ -63,6 +63,8 @@ async function requestCDNResource(requestData){
         let valueStr = query[key]+''
         valueStr = valueStr.replace(/:/g,'%3A');
         valueStr = valueStr.replace(/\//g,'%2F');
+        valueStr = valueStr.replace(/{/g,'%7B');
+        valueStr = valueStr.replace(/}/g,'%7D');
         let value = utility.encodeURIComponent(valueStr);
         key = utility.encodeURIComponent(key);
         sortQuery[key] = value
@@ -88,7 +90,7 @@ async function requestCDNResource(requestData){
         let value = fullParam[key] + "";
         if(value.match(/:/g)){
           value = value.replace(/:/g,'%3A');
-        }else if(value.match(/\//g)){
+        }else if(value.match(/\//g) || value.match(/{/g)){
           value = utility.encodeURIComponent(value);
         }
         //value = value.replace(/:/g,'%3A');
@@ -489,6 +491,30 @@ let ApiOperationConfig = {
             "type": "string"
           },
           "OssObjectPrefix": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "deleteLiveAppRecordConfig": {
+      "name": "DeleteLiveAppRecordConfig",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLiveAppRecordConfig"
+          },
+          "AppName":{
+            "required": true,
+            "type": "string"
+          },
+          "DomainName": {
             "required": true,
             "type": "string"
           }
