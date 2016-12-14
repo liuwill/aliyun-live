@@ -525,35 +525,55 @@ let ApiOperationConfig = {
 
 let MtsOperationConfig = {
   "queryMediaListByURL": {
-      "name": "QueryMediaListByURL",
-      "http": {
-        "method": "POST",
-        "uri": "/"
-      },
-      "input": {
-        "type": "structure",
-        "members": {
-          "Action": {
-            "required": true,
-            "default": "QueryMediaListByURL"
-          },
-          "FileURLs":{
-            "required": true,
-            "type": "string"
-          },
-          "IncludePlayList":{
-            "required": false,
-            "type": "string"
-          },
-          "IncludeSnapshotList": {
-            "required": false,
-            "type": "string"
-          },
-          "IncludeMediaInfo": {
-            "required": false,
-            "type": "string"
-          }
+    "name": "QueryMediaListByURL",
+    "http": {
+      "method": "POST",
+      "uri": "/"
+    },
+    "input": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "required": true,
+          "default": "QueryMediaListByURL"
+        },
+        "FileURLs":{
+          "required": true,
+          "type": "string"
+        },
+        "IncludePlayList":{
+          "required": false,
+          "type": "string"
+        },
+        "IncludeSnapshotList": {
+          "required": false,
+          "type": "string"
+        },
+        "IncludeMediaInfo": {
+          "required": false,
+          "type": "string"
         }
       }
+    }
+  },
+  'queryMediaWorkflowExecutionList':{
+    "name": "QueryMediaWorkflowExecutionList",
+    "http": {
+      "method": "POST",
+      "uri": "/"
     },
+    "input": {
+      "type": "structure",
+      "members": {
+        "Action": {
+          "required": true,
+          "default": "QueryMediaWorkflowExecutionList"
+        },
+        "RunIds":{
+          "required": true,
+          "type": "string"
+        },
+      }
+    }
+  },
 };
