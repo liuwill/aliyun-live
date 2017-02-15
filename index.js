@@ -65,6 +65,7 @@ async function requestCDNResource(requestData){
         valueStr = valueStr.replace(/\//g,'%2F');
         valueStr = valueStr.replace(/{/g,'%7B');
         valueStr = valueStr.replace(/}/g,'%7D');
+        valueStr = valueStr.replace(/,/g,'%2C');
         let value = utility.encodeURIComponent(valueStr);
         key = utility.encodeURIComponent(key);
         sortQuery[key] = value
@@ -90,7 +91,7 @@ async function requestCDNResource(requestData){
         let value = fullParam[key] + "";
         if(value.match(/:/g)){
           value = value.replace(/:/g,'%3A');
-        }else if(value.match(/\//g) || value.match(/{/g)){
+        }else if(value.match(/\//g) || value.match(/{/g) || value.match(/,/g)){
           value = utility.encodeURIComponent(value);
         }
         //value = value.replace(/:/g,'%3A');
