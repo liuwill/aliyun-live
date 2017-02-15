@@ -521,6 +521,70 @@ let ApiOperationConfig = {
         }
       }
     },
+    "AddLiveStreamTranscode":{
+      "name": "AddLiveStreamTranscode",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "AddLiveStreamTranscode"
+          },
+          "App":{
+            "required": true,
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          },
+          "Template":{
+            "required": true,
+            "type": "string"
+          },
+          "Record": {
+            "required": true,
+            "type": "string"
+          },
+          "Snapshot": {
+            "required": true,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeleteLiveStreamTranscode": {
+      "name": "DeleteLiveStreamTranscode",
+      "http": {
+        "method": "POST",
+        "uri": "/"
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "Action": {
+            "required": true,
+            "default": "DeleteLiveStreamTranscode"
+          },
+          "App":{
+            "required": true,
+            "type": "string"
+          },
+          "Domain": {
+            "required": true,
+            "type": "string"
+          },
+          "Template":{
+            "required": true,
+            "type": "string"
+          },
+        }
+      }
+    },
 };
 
 let MtsOperationConfig = {
