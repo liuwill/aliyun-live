@@ -521,7 +521,7 @@ let ApiOperationConfig = {
         }
       }
     },
-    "AddLiveStreamTranscode":{
+    "addLiveStreamTranscode":{
       "name": "AddLiveStreamTranscode",
       "http": {
         "method": "POST",
@@ -557,7 +557,7 @@ let ApiOperationConfig = {
         }
       }
     },
-    "DeleteLiveStreamTranscode": {
+    "deleteLiveStreamTranscode": {
       "name": "DeleteLiveStreamTranscode",
       "http": {
         "method": "POST",
